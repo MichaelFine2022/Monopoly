@@ -10,6 +10,7 @@ class ToJail : public Space {
         ToJail(Space *);
         void sendToJail(Player *player);
         Jail * getJail();
+        void handleLanding(Player* ptr, Interface* display) override;
     private:
         Jail *jailPtr;
 

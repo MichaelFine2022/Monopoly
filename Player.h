@@ -28,7 +28,9 @@ class Player {
         int doublesCount;
         bool lastRollWasDouble;
         void handleLanding(Interface* display);
+        
     public:
+        void sendToJail();
         std::map<int, int> ownedGroups;
         void takeTurn(Space **);
         bool isPlayerBankrupt() const;

@@ -9,5 +9,6 @@ class Chance : public Drawable {
         
     public:
         Chance();
+        void handleLanding(Player* ptr, Interface* display) override;
         void drawCard();
 };

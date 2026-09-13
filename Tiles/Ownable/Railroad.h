@@ -10,7 +10,7 @@ class Railroad : public Ownable {
         RailDeed *deed;
     public:
         int getRent(int numOwned);
-        int getRent(Player *);
+        int getRent(Player* rollingPlayer) override;
         char *getName();
         //name, rent, cost
         Railroad(const char *name, int rent, int cost);

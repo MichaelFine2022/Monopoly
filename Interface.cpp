@@ -8,7 +8,7 @@
 using namespace std;
 
 Interface::Interface() {
-    cout << "Welcome to Monopoly" << endl;
+    interfaceIntroduction();
 }
 
 unsigned int Interface::getNumPlayers() {
@@ -20,11 +20,18 @@ unsigned int Interface::getNumPlayers() {
 }
 
 void Interface::declareVictory(vector<Player*>& vect) {
-    return;
+    if (!vect.empty()) {
+        std::cout << "\n===================================\n";
+        std::cout << "   PLAYER " << vect[0]->getId() << " WINS MONOPOLY!\n";
+        std::cout << "===================================\n\n";
+    }
 }
 
 void Interface::interfaceIntroduction() {
-    return;
+    std::cout << "\n=======================================\n";
+    std::cout << "          TERMINAL MONOPOLY            \n";
+    std::cout << "=======================================\n";
+    std::cout << "A C++ Object-Oriented Implementation\n\n";
 }
 
 void Interface::promptAction(Player* player) {

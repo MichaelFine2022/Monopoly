@@ -7,7 +7,7 @@ Player *Ownable::getOwner() {
 int Ownable::getCost() {
     return cost;
 }
-int Ownable::getRent() {
+int Ownable::getRent(Player* rollingPlayer) {
     return rent;
 }
 int Ownable::getMortgageValue() {
@@ -30,7 +30,7 @@ void Ownable::handleLanding(Player * landingPlayer, Interface* display) {
     if (hasOwner()) {
         // Prevents the game from paying rent to yourself and ignore mortgaged properties
         if (owner != landingPlayer && !isMortgaged()) {
-            int rentAmt = getRent();
+            int rentAmt = getRent(landingPlayer);
             landingPlayer->loseCash(rentAmt);
             owner->giveCash(rentAmt);
             display->announceRent(landingPlayer->getId(), owner->getId(), rentAmt);

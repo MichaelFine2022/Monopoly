@@ -14,7 +14,7 @@ class Ownable : public Space {
         bool hasOwner();
         void changeOwner(Player *newOwner);
         int getCost();
-        int getRent();
+        virtual int getRent(Player* rollingPlayer = nullptr);
         int getMortgageValue();
         bool isMortgaged();
         void handleLanding(Player *ptr, Interface* display) override;

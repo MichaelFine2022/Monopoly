@@ -8,4 +8,6 @@ class CommunityChest : public Drawable {
         
     public:
         CommunityChest();
+        void handleLanding(Player* ptr, Interface* display) override;
+        void drawCard();
 };

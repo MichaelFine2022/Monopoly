@@ -7,6 +7,6 @@ class Utility : public Ownable {
     private:
     public:
         int getRent(int roll, int numOwned);
-        int getRent();
+        int getRent(Player* rollingPlayer) override;
         Utility(const char *name);
 };

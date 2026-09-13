@@ -114,6 +114,19 @@ void Player::giveCash(int cash) {
 void Player::loseCash(int cash) {
     this->cash -= cash;
     updateTotalCash();
+
+    if (this->cash < 0) {
+        this->isBankrupt = true;
+        std::cout << "\n*** Player " << this->id << " has gone BANKRUPT! ***\n";
+    }
+}
+
+void Player::sendToJail() {
+    this->inJail = true;
+    this->jailTurns = 0;
+    this->doublesCount = 0;
+    this->boardIndex = 10;
+    this->space_ptr = boardArray[10];
 }
 
 void Player::movePlayer(int roll) {
