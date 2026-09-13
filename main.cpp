@@ -33,8 +33,12 @@ int main() {
         //remove each player if bankrupt
         players.erase(remove_if(
             players.begin(), players.end(),
-            [](const Player* player){
-                return player->isPlayerBankrupt();
+            [](Player* player){
+                if (player->isPlayerBankrupt()) {
+                    delete player;
+                    return true;
+                }
+                return false;
             }
         ), players.end());
 

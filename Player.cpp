@@ -24,6 +24,25 @@ Player::Player(Space **arr, int id) {
     this->lastRollWasDouble = false;
 };
 
+Player::~Player() {
+    for (Ownable* prop : properties) {
+        if (prop) {
+            prop->changeOwner(nullptr);
+        }
+    }
+    properties.clear();
+}
+
+void Player::printStatus() const {
+    std::cout << "\n--- Player " << id << " Status ---\n"
+                << "Cash: $" << cash << "\n"
+                << "Properties Owned: " << properties.size() << "\n";
+    for (Ownable* p : properties) {
+        std::cout << " - " << p->getName() << "\n";
+    }
+    std::cout << "------------------------\n\n";
+}
+
 void Player::takeTurn(Space ** ptr, Interface* display) {
     do {
         if (inJail) {
@@ -36,6 +55,7 @@ void Player::takeTurn(Space ** ptr, Interface* display) {
                 jailTurns++;
                 if (jailTurns == 3) {
                     loseCash(50);
+                    display->announceJailFine(this->id, 50);
                     inJail = false;
                     jailTurns = 0;
                     movePlayer(rollResult);
@@ -45,7 +65,7 @@ void Player::takeTurn(Space ** ptr, Interface* display) {
                 }
             }
         }
-        display->promptRoll(this->id);
+        display->promptAction(this);
         int rollResult = roll();
         if (doublesCount == 3) {
             inJail = true;

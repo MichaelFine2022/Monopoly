@@ -2,10 +2,10 @@
 #pragma once
 
 class Player;
+class Interface;
 class Drawable : public Space {
-    private:
-        
     public:
         Drawable();
         void drawCard();
+        void handleLanding(Player* ptr, Interface* display) override;
 };

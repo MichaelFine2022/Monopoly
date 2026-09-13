@@ -1,6 +1,7 @@
 #pragma once
 
 class Player;
+class Interface;
 class Space {
     private:
         const char *name;

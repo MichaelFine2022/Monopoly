@@ -42,6 +42,8 @@ class Player {
         int getNumUtilitiesOwned();
         int getLastRollValue();
         Player(Space **, int id);
+        ~Player();
+        void printStatus() const;
         int getId() const { return id; }
         void takeTurn(Space **, Interface* display);
 };

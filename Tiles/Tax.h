@@ -9,4 +9,5 @@ class Tax : public Space {
         Tax(const char *name, int tax);
         Tax(const char *name);
         int getTax();
+        void handleLanding(Player* ptr, Interface* display) override;
 };
