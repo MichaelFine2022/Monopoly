@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Interface.h"
 #include "Board.h"
 #include "Tiles/Ownable/Railroad.h"
 #include "Tiles/Ownable/Property/Property.h"
@@ -8,7 +9,8 @@
 #include <ctime>
 #include <vector>
 
-Player::Player(Space **arr) {
+Player::Player(Space **arr, int id) {
+    this->id = id;
     this->cash = 1500;
     this->boardIndex = 0;
     this->boardArray = arr;
@@ -22,7 +24,7 @@ Player::Player(Space **arr) {
     this->lastRollWasDouble = false;
 };
 
-void Player::takeTurn(Space ** ptr) {
+void Player::takeTurn(Space ** ptr, Interface* display) {
     do {
         if (inJail) {
             int rollResult = roll();
@@ -43,6 +45,7 @@ void Player::takeTurn(Space ** ptr) {
                 }
             }
         }
+        display->promptRoll(this->id);
         int rollResult = roll();
         if (doublesCount == 3) {
             inJail = true;
@@ -50,7 +53,8 @@ void Player::takeTurn(Space ** ptr) {
             moveTo((*ptr) + 9);
         }
         movePlayer(rollResult);
-        handleLanding();
+        display->announceRoll(this->id, rollResult, space_ptr->getName());
+        handleLanding(display);
     } while (lastRollWasDouble && !inJail);
     
 };
@@ -103,8 +107,8 @@ void Player::movePlayer(int roll) {
     this->space_ptr = boardArray[boardIndex];
 
 }
-void Player::handleLanding() {
-    space_ptr->handleLanding(this);
+void Player::handleLanding(Interface* display) {
+    space_ptr->handleLanding(this, display);
 }
 void Player::moveTo(Space *ptr) {
     if (ptr == nullptr) return;

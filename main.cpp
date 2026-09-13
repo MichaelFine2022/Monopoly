@@ -21,15 +21,14 @@ int main() {
     Board *board = new Board();
 
     for (unsigned int i = 0; i < (unsigned int) numPlayers; i++) {
-        players.push_back(new Player(board->board));
+        players.push_back(new Player(board->board, i + 1));
     }
 
     //iterate through all players and have everyone take their turns
     unsigned int index = 0;
     while (numPlayers > 1) {
         
-        //take each player's turn
-        players[index]->takeTurn(board->board);
+        players[index]->takeTurn(board->board, display);
 
         //remove each player if bankrupt
         players.erase(remove_if(

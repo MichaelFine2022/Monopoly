@@ -3,18 +3,20 @@
 #include <map>
 #include <vector>
 
+
 using namespace std;
 class Space;
 class Ownable;
+class Interface;
 class Player {
     private:
+        int id;
         Space** boardArray;
         int roll();
         signed int cash;
         int boardIndex;
         Space* space_ptr;
         void movePlayer(int roll);
-        void handleLanding();
         signed int totalCash;
         bool isBankrupt;
         vector<Ownable *> properties;
@@ -25,6 +27,7 @@ class Player {
         int jailTurns;
         int doublesCount;
         bool lastRollWasDouble;
+        void handleLanding(Interface* display);
     public:
         std::map<int, int> ownedGroups;
         void takeTurn(Space **);
@@ -38,5 +41,7 @@ class Player {
         int getNumRailroadsOwned();
         int getNumUtilitiesOwned();
         int getLastRollValue();
-        Player(Space **);
+        Player(Space **, int id);
+        int getId() const { return id; }
+        void takeTurn(Space **, Interface* display);
 };

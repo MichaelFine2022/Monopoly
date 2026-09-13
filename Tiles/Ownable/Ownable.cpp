@@ -1,4 +1,5 @@
 #include "Ownable.h"
+#include "../../Interface.h"
 
 Player *Ownable::getOwner() {
     return owner;
@@ -23,28 +24,25 @@ bool Ownable::hasOwner() {
     else return true;
 }
 
-void Ownable::handleLanding(Player * landingPlayer) {
+void Ownable::handleLanding(Player * landingPlayer, Interface* display) {
     //if it has an owner, pay rent
     //if not, ask if they want to buy it
     if (hasOwner()) {
-        int rent = getRent();
-        landingPlayer->loseCash(rent);
+        // Prevents the game from paying rent to yourself and ignore mortgaged properties
+        if (owner != landingPlayer && !isMortgaged()) {
+            int rentAmt = getRent();
+            landingPlayer->loseCash(rentAmt);
+            owner->giveCash(rentAmt);
+            display->announceRent(landingPlayer->getId(), owner->getId(), rentAmt);
+        }
     }
     else {
         if (landingPlayer->canBuy(this)) {
-            //if they want to buy it
-            if (true) {
+            if (display->promptPurchase(landingPlayer->getId(), this->getName(), this->getCost())) {
                 landingPlayer->buyProperty(this);
-            } else {
-                //return for now
-                return;
+                this->changeOwner(landingPlayer);
             }
         }
-        else {
-            return;
-        }
-        //if they can buy it AT ALL, ask
-        //if not say they can't buy it
     }
 }
 Ownable::Ownable(const char *name, int cost, int rent) : Space(name) {

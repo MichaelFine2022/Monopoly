@@ -17,7 +17,7 @@ class Ownable : public Space {
         int getRent();
         int getMortgageValue();
         bool isMortgaged();
-        void handleLanding(Player *ptr);
+        void handleLanding(Player *ptr, Interface* display) override;
         Ownable(const char *name, int cost, int rent);
         Ownable();
 };

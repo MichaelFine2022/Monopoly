@@ -8,7 +8,7 @@ class Space {
     public:
         Space();
         Space(const char *name);
-        virtual void handleLanding(Player *) {};
+        virtual void handleLanding(Player *, Interface* display) {};
         const char *getName() const;
         virtual ~Space();
 };
