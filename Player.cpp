@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Board.h"
-#include "Railroad.h"
+#include "Tiles/Ownable/Railroad.h"
+#include "Tiles/Ownable/Property/Property.h"
 
 #include <string>
 #include <cstdlib>
@@ -10,7 +11,8 @@
 Player::Player(Space **arr) {
     this->cash = 1500;
     this->boardIndex = 0;
-    this->space_ptr = *arr;
+    this->boardArray = arr;
+    this->space_ptr = arr[0];
     this->totalCash = cash;
     this->isBankrupt = false;
     this->rollValue = 0;
@@ -53,12 +55,12 @@ void Player::takeTurn(Space ** ptr) {
     
 };
 
-bool Player::isPlayerBankrupt() const{
+bool Player::isPlayerBankrupt() const {
     return this->isBankrupt;
 }
 
 int Player::roll() {
-    srand(time(0));
+    
     unsigned int diceOne = (rand() % 6) + 1;
     unsigned int diceTwo = (rand() % 6) + 1;
     rollValue = diceOne + diceTwo;
@@ -91,18 +93,15 @@ void Player::loseCash(int cash) {
 }
 
 void Player::movePlayer(int roll) {
-    for (int i = 0; i < roll; i++) {
-        boardIndex++;
-        
-        if (boardIndex == 40) {
-            this->cash += 200;
-            boardIndex = 0;
-            this->space_ptr = space_ptr - 39;
-        }
-        else {
-            this->space_ptr = space_ptr + 1;
-        }
+    int newIndex = (boardIndex + roll) % 40;
+
+    if (newIndex < boardIndex) {
+        this->giveCash(200);
     }
+
+    boardIndex = newIndex;
+    this->space_ptr = boardArray[boardIndex];
+
 }
 void Player::handleLanding() {
     space_ptr->handleLanding(this);

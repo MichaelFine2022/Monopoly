@@ -1,7 +1,6 @@
 #include "Utility.h"
 
-Utility::Utility(char *name) {
-    Space(name);
+Utility::Utility(const char *name) : Ownable(name, 150, 0) {
 }
 
 int getRent(int roll, int numOwned) {

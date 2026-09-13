@@ -1,14 +1,14 @@
 #pragma once
 
-
+class Player;
 class Space {
     private:
-        char *name;
+        const char *name;
         
     public:
         Space();
-        Space(char *name);
-        void handleLanding(Player *);
-        char *getName() const;
+        Space(const char *name);
+        virtual void handleLanding(Player *) {};
+        const char *getName() const;
         virtual ~Space();
 };

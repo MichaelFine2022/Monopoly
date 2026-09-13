@@ -1,6 +1,8 @@
+#pragma once
+
 #include "Space.h"
 #include "Jail.h"
-#include "Player.h"
+#include "../Player.h"
 
 
 class ToJail : public Space {

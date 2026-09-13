@@ -1,5 +1,7 @@
-#include <Player.h>
+#include "../Player.h"
 #include "Deed.h"
+
+#pragma once
 
 class RailDeed : public Deed {
     public:

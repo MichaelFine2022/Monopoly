@@ -13,7 +13,7 @@ int Ownable::getMortgageValue() {
     return getCost() / 2;
 }
 bool Ownable::isMortgaged() {
-    return isMortgaged;
+    return mortgaged;
 }
 void Ownable::changeOwner(Player* newOwner) {
     this->owner = newOwner;
@@ -47,12 +47,11 @@ void Ownable::handleLanding(Player * landingPlayer) {
         //if not say they can't buy it
     }
 }
-Ownable::Ownable(char *name, int cost, int rent) {
-    Space(name);
+Ownable::Ownable(const char *name, int cost, int rent) : Space(name) {
     this->cost = cost;
     this->rent = rent;
-    this->owner = 0;
+    this->owner = nullptr;
 }
 Ownable::Ownable() {
-    this->owner = 0;
+    this->owner = nullptr;
 }

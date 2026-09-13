@@ -1,6 +1,7 @@
+#pragma once
 #include "../Space.h"
-#include <Decks\TitleDeed.h>
-//#include "../../Player.h"
+#include "../../Player.h"
+
 class Player;
 class Ownable : public Space {
     private:
@@ -17,6 +18,6 @@ class Ownable : public Space {
         int getMortgageValue();
         bool isMortgaged();
         void handleLanding(Player *ptr);
-        Ownable(char *name, int cost, int rent);
+        Ownable(const char *name, int cost, int rent);
         Ownable();
 };

@@ -1,24 +1,27 @@
 #include <iostream>
-#include "Player.h"
-#include "Tiles/Space.h"
 #include <vector>
 #include <algorithm>
+
+#include "Interface.h"
+#include "Tiles/Space.h"
+
+#include "Player.h"
+#include "Board.h"
+#include <ctime>
 
 using namespace std;
 
 int main() {
-    unsigned int numPlayers;
-    cout << "How many Players?" << endl;
-    cin >> numPlayers;
+    srand(time(0));
+    Interface *display = new Interface();
+    signed int numPlayers = display->getNumPlayers();
     vector<Player *> players(numPlayers);
     
-    
-
     //setup board
-    Space * board[40];
+    Board *board = new Board();
 
-    for (unsigned int i = 0; i < numPlayers; i++) {
-        players.push_back(new Player(board));
+    for (unsigned int i = 0; i < (unsigned int) numPlayers; i++) {
+        players.push_back(new Player(board->board));
     }
 
     //iterate through all players and have everyone take their turns
@@ -26,17 +29,17 @@ int main() {
     while (numPlayers > 1) {
         
         //take each player's turn
-        players[index]->takeTurn(board);
+        players[index]->takeTurn(board->board);
 
         //remove each player if bankrupt
         players.erase(remove_if(
             players.begin(), players.end(),
             [](const Player* player){
-                return player->isPlayerBankrupt() == true;
+                return player->isPlayerBankrupt();
             }
         ), players.end());
 
-        //get num player in game
+        //get number of players in game
         if ((unsigned int) numPlayers != ((unsigned int) players.size())) {
             numPlayers = players.size();
         }
@@ -44,12 +47,17 @@ int main() {
             index++;
         }
 
-        if (index >= numPlayers) {
+        if ((unsigned int) index >= (unsigned int) numPlayers) {
             index = 0;
         }
     }
-    cout << "Player Victory";
+    display->declareVictory(players);
+    
     delete board;
+    delete display;
+    for (Player* p : players) {
+        delete p;
+    }
     return 0;
 }
 

@@ -35,7 +35,7 @@ int TitleDeed::getRentWithHotel() {
 int TitleDeed::getHouseCost() {
     return houseCost;
 }
-int Deed::getCost() {
+int TitleDeed::getCost() {
     return cost;
 }
 int TitleDeed::getMortgageValue() {

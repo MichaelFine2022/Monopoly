@@ -1,7 +1,7 @@
 #include "Chance.h"
 
 
-void drawCard() {
+void Chance::drawCard() {
 
 }
 Chance::Chance() {

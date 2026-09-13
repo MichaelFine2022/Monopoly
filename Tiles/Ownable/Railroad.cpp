@@ -1,10 +1,10 @@
-#include <Railroad.h>
-#include <Ownable.h>
+#include "Railroad.h"
+#include "Ownable.h"
 
-Railroad::Railroad(char *name, int rent, int cost) {
+Railroad::Railroad(const char *name, int rent, int cost) {
     Ownable(name, rent, cost);
 };
-Railroad::Railroad(char *name, Deed * deed) {
+Railroad::Railroad(const char *name, Deed * deed) {
     Ownable(name, deed->getCost(), deed->getRent());
     this->deed = dynamic_cast<RailDeed*>(deed);
 };

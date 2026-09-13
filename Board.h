@@ -1,9 +1,11 @@
-#include <map>
+#pragma once
 
-#include "Space.h"
+#include <map>
 
 #include "Tiles/Ownable/Property/Property.h"
 #include "Tiles/Ownable/Utility.h"
+
+#include "Tiles/Space.h"
 
 #include "Tiles/Drawable/CommunityChest.h"
 #include "Tiles/Drawable/Chance.h"
@@ -14,16 +16,16 @@
 #include "Tiles/FreeParking.h"
 #include "Tiles/ToJail.h"
 
-#include "Decks/RailDeed.h"
 
 #include <iostream>
 using namespace std;
 
+class Deed;
 class Board {
     public:
         Space *board[40] = {0};
         
-        std::map<char *, Deed*> propertyMap;
+        std::map<const char *, Deed*> propertyMap;
         Board();
         ~Board();
         void setup_US_spaces();

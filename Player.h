@@ -1,6 +1,14 @@
-#include "Tiles/Space.h"
+#pragma once
+
+#include <map>
+#include <vector>
+
+using namespace std;
+class Space;
+class Ownable;
 class Player {
     private:
+        Space** boardArray;
         int roll();
         signed int cash;
         int boardIndex;

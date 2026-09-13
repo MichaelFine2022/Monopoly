@@ -1,3 +1,5 @@
+#pragma once
+
 class Deed {
     public:
     virtual int getRent();
