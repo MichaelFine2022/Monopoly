@@ -23,6 +23,22 @@ bool Ownable::hasOwner() {
     if (owner == nullptr) return false;
     else return true;
 }
+void Ownable::mortgageProperty() {
+    if (!mortgaged && owner != nullptr) {
+        mortgaged = true;
+        owner->giveCash(getMortgageValue());
+    }
+}
+
+void Ownable::unmortgageProperty() {
+    if (mortgaged && owner != nullptr) {
+        int cost = getMortgageValue() + (getMortgageValue() / 10);
+        if (owner->getCash() >= cost) {
+            mortgaged = false;
+            owner->loseCash(cost);
+        }
+    }
+}
 
 void Ownable::handleLanding(Player * landingPlayer, Interface* display) {
     //if it has an owner, pay rent

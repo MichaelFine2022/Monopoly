@@ -16,8 +16,11 @@
 #include "Tiles/FreeParking.h"
 #include "Tiles/ToJail.h"
 
+#include "Decks/Deck.h"
+
 
 #include <iostream>
+
 using namespace std;
 
 class Deed;
@@ -29,4 +32,6 @@ class Board {
         Board();
         ~Board();
         void setup_US_spaces();
+        Deck chanceDeck;
+        Deck communityChestDeck;
 };

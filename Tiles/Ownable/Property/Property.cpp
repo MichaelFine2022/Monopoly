@@ -17,6 +17,33 @@ int Property::getGroup() {
     return group;
 }
 
+bool Property::buildHouse() {
+    Player* currentOwner = this->getOwner();
+    
+    if (currentOwner != nullptr && numHouses < 4 && !propertyhasHotel) {
+        if (currentOwner->getCash() >= houseCost) {
+            currentOwner->loseCash(houseCost);
+            numHouses++;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Property::buildHotel() {
+    Player* currentOwner = this->getOwner();
+    
+    if (currentOwner != nullptr && numHouses == 4 && !propertyhasHotel) {
+        if (currentOwner->getCash() >= houseCost) {
+            currentOwner->loseCash(houseCost);
+            numHouses = 0;
+            propertyhasHotel = true;
+            return true;
+        }
+    }
+    return false;
+}
+
 //name, value, rent, houseCost, group
 Property::Property(const char *name, int value, int rent, int houseCost, int group) {
     this->group = group;

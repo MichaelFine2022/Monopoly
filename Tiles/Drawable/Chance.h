@@ -1,14 +1,15 @@
-#include "../Space.h"
+#pragma once
+
 #include "Drawable.h"
 
 
-#pragma once
+
+class Deck;
 
 class Chance : public Drawable {
     private:
-        
+        Deck* deckPtr;
     public:
-        Chance();
+        Chance(Deck* deck);
         void handleLanding(Player* ptr, Interface* display) override;
-        void drawCard();
 };

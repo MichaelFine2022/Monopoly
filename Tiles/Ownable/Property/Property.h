@@ -14,6 +14,8 @@ class Property : public Ownable {
         int getHouseCost();
         bool hasHotel();
         int getGroup();
+        bool buildHouse();
+        bool buildHotel();
         // name, value, rent, houseCost, groupNum
         Property(const char *name, int value, int rent, int houseCost, int group);
         Property(const char *name, Deed *deed);

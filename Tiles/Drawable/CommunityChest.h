@@ -1,13 +1,12 @@
-#include "../Space.h"
-#include "Drawable.h"
 #pragma once
+#include "Drawable.h"
 
 
+class Deck;
 class CommunityChest : public Drawable {
     private:
-        
+        Deck* deckPtr;
     public:
-        CommunityChest();
+        CommunityChest(Deck* deck);
         void handleLanding(Player* ptr, Interface* display) override;
-        void drawCard();
 };
