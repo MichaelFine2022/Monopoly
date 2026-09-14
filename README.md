@@ -25,5 +25,5 @@ This project includes a custom Windows batch script to automate the build proces
 
 **Compilation & Execution:**
 1. Clone the repository and navigate to the root directory.
-2. Run the build script by typing make into the terminal (with no spaces):
+2. Run the build script by typing "make" into the terminal (with no spaces):
    make
